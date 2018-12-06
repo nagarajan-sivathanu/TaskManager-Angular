@@ -1,0 +1,108 @@
+
+<div class="container">
+  <h4>Edit Your Task Here!</h4>  <br>
+  <form id="updateTaskForm" class="col-sm-6" (ngSubmit)="onUpdate()" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-3">
+          <label for="taskName">Task:</label>
+        </div>
+        <div class="col-sm-9" >
+          <input 
+              class="form-control" 
+              type="text" 
+              placeholder="Enter Task Name" 
+              id="taskname" 
+              [(ngModel)]="task.task" 
+              name="taskname"
+              required
+              #taskDet='ngModel'  
+            >
+            <span class="help-block"
+                  *ngIf="!taskDet.valid && taskDet.touched">Please enter valid Task Name</span>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+          <div class="col-sm-3">
+            <label for="priority">Priorty:</label>
+          </div>
+          <div class="col-sm-9">
+            <input 
+              class="form-control" 
+              type="range" 
+              id="priority" 
+              min="1" 
+              max="30" 
+              step="1" 
+              [(ngModel)]="task.priority"  
+              name="priority"
+            >
+          </div>
+      </div>
+      <br>
+      <div class="row">
+          <div class="col-sm-3">
+            <label for="parentTask">Parent Task:</label>
+          </div>
+          <div class="col-sm-9">
+            <select id="Id" #Id="ngModel" class="hideLabel form-control" [(ngModel)]="task.parentTask" name="parentTask" >  
+                <option selected="" value=""></option>  
+                <option [ngValue]="k.task" *ngFor="let k of tasks">  
+                    {{k.task}}  
+                </option>
+            </select> 
+          </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">
+          <label for="startDate">Start Date</label>
+        </div>
+        <div class="col-sm-9">
+          <input 
+            class="form-control" 
+            type="date" 
+            id="startDate"
+            [(ngModel)]="task.startDate"
+            name="startDate" 
+            required
+            #startDat='ngModel'>
+            <span class="help-block"
+                *ngIf="!startDat.valid && startDat.touched">Please enter Start Date for the task</span>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">
+          <label for="endDate">End Date</label>
+        </div>
+        <div class="col-sm-9">
+          <input 
+            class="form-control" 
+            type="date" 
+            id="endDate"
+            [(ngModel)]="task.endDate"
+            name="endDate"
+            required
+            #endDat='ngModel' 
+          >
+          <span class="help-block"
+                *ngIf="!endDat.valid && endDat.touched">Please enter End Date for the task</span>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-2">
+            <button id="UpdateTaskButton"
+                    class="btn btn-dark" 
+                    type="submit"
+                    [disabled]="!taskDet.valid || !startDat.valid || !endDat.valid">Update</button>
+        </div>
+        <div class="col-sm-2">
+          <button   id="CancelTaskButton"
+                    class="btn btn-dark" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>  
+    </form>
+    <br><hr>
+</div>

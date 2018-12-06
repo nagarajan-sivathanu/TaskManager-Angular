@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="row">
+    <h4>Search & Filter Tasks</h4>
+  </div>
+  <br>
+  <form (ngSubmit)="onSearch(f)" #f="ngForm">
+  <div class="row">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Task:</label>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <input type="text" name="taskName" ngModel>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Parent Task:</label>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-2">
+       <!--<input type="text" name="parentTaskName" ngModel> -->
+       <select id="Id" #Id="ngModel" class="hideLabel form-control" [(ngModel)]="parentTaskName" name="parentTaskName" >  
+          <option selected="Select a Parent" value=""></option>  
+          <option [ngValue]="k.task" *ngFor="let k of tasks">  
+              {{k.task}}  
+          </option> 
+        </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Priroty From:</label>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <input type="number" name="priorityFrom" ngModel>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Priority To:</label>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-2">
+      <input type="number" name="priorityTo" ngModel>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Start Date:</label>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <input type="date" name="startDate" ngModel>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>End Date:</label>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-2">
+      <input type="date" name="endDate" ngModel>
+    </div>
+  </div>
+  <button class="btn btn">Search</button>
+</form>
+  <br>
+  <br>
+</div>
+
+ <hr>
+
+ <div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+      <label class="font-weight-bold">Task</label>
+    </div>
+    <div class="col-lg-2">
+      <label class="font-weight-bold">Parent</label>
+    </div>
+    <div class="col-lg-1">
+      <label class="font-weight-bold">Priority</label>
+    </div>
+    <div class="col-lg-2">
+      <label class="font-weight-bold">Start Date</label>
+    </div>
+    <div class="col-lg-2">
+      <label class="font-weight-bold">End Date</label>
+    </div>
+  </div>
+  <hr>
+  <div id="rowList" class="row" *ngFor="let task of filteredTasks">
+    <div class="col-lg-2">
+      <textarea [readonly]='true'>{{task.task}}</textarea>
+    </div>
+    <div class="col-lg-2">
+      <textarea [readonly]='true'>{{task.parentTask}}</textarea>
+    </div>
+    <div class="col-lg-1">
+      <label>{{task.priority}}</label>
+    </div>
+    <div class="col-lg-2">
+      <label>{{task.startDate|date:'yyyy-MM-dd'}}</label>
+    </div>
+    <div class="col-lg-2">
+      <label>{{task.endDate|date:'yyyy-MM-dd'}}</label>
+    </div>
+    <div class="col-lg-1">
+        <button class="btn btn-dark btn-sm" [disabled]="isActive(task)" (click)="onEdit(task)">Edit Task</button>
+    </div>
+    <div class="col-lg-1">
+      <button class="btn btn-dark btn-sm" [disabled]="isActive(task)" (click)="onEnd(task)">End Task</button>
+    </div>
+  </div>
+ </div>
+ <hr>
+
+
+

@@ -5,7 +5,19 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  navigateToPath(path:string){
+    return browser.get('/'+path);
+  }
+
+  getElementByClassName(className:string){
+    return element(by.className(className));
+  }
+
+  getElement(id:string){
+    return element(by.id(id));
+  }
+
+  getElementByTagName(tagName:string){
+    return element(by.tagName(tagName));
   }
 }
